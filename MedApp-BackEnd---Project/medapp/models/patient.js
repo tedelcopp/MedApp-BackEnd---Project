@@ -1,3 +1,4 @@
+// models/patient.model.js
 module.exports = (sequelize, DataTypes) => {
   const Patient = sequelize.define(
     "Patient",
@@ -19,16 +20,16 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        validate: {
-          isEmail: true,
-        },
       },
       phone: {
         type: DataTypes.STRING,
         allowNull: false,
       },
     },
-    {}
+    {
+      timestamps: true,
+      tableName: "patients",
+    }
   );
 
   return Patient;
