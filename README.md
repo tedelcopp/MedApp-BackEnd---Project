@@ -19,6 +19,9 @@
 - **🗂️ Manejo de pacientes y citas**: Creación, edición y eliminación de registros médicos y agendamiento de citas.
 - **⚡ API optimizada**: Endpoints *RESTful* organizados y eficientes.
 - **🔄 Integración con el frontend**: Conexión fluida con la plataforma *MedApp*.
+- ** 📅 | Administración de citas: Creación, edición y eliminación de turnos médicos.
+- ** 📊 | Panel de control: Endpoints optimizados para proporcionar datos clave al frontend.
+- ** 🛠️ | Documentación con Swagger: API documentada para facilitar el desarrollo y la integración.
 
 ---
 
