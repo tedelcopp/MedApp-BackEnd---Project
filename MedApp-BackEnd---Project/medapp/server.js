@@ -1,12 +1,26 @@
 require("dotenv").config();
 const express = require("express");
+const cors = require("cors");
+
 const app = express();
 const routes = require("./routes");
 
+const PORT = process.env.PORT || 3002;
+
 app.use(express.json());
+app.use(cors()); // Permitir solicitudes desde cualquier origen
 app.use("/api", routes);
 
-const PORT = process.env.PORT || 3000;
+app.get("/", (req, res) => {
+  res.send("¡Servidor funcionando!");
+});
+
+// Middleware de manejo de errores
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: "Ocurrió un error inesperado" });
+});
+
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en el puerto ${PORT}`);
+  console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });
