@@ -37,15 +37,15 @@ const validatePatientData = async (data) => {
   }
 };
 
-// Función para crear un paciente.
-const createPatient = async (data) => {
-  // Primero, valida los datos del paciente..
-  await validatePatientData(data);
-
-  // Si los datos son válidos, crea el paciente.
-  const patient = await Patient.create(data);
-  return patient;
-};
+async function createPatient(data) {
+  try {
+    const patient = await Patient.create(data);
+    return patient;
+  } catch (error) {
+    console.error("Error al crear paciente:", error);
+    throw new Error("No se pudo crear el paciente");
+  }
+}
 
 module.exports = {
   createPatient,

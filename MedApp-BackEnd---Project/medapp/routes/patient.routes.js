@@ -1,5 +1,7 @@
 const express = require("express");
 const { Patient } = require("../models");
+const { createPatient } = require("../services/patient.service");
+const { createPatientHandler } = require("../controllers/patient.controller");
 const { validatePatientData } = require("../services/patient.service"); // Asegúrate de tener este servicio
 
 const router = express.Router();
@@ -17,41 +19,16 @@ router.get("/", async (req, res) => {
 });
 
 // Crear un paciente
-router.post("/", async (req, res) => {
-  try {
-    const { firstName, lastName, dni, email, phone } = req.body;
-
-    // Validar los datos antes de crear
-    await validatePatientData(req.body);
-
-    const patient = await Patient.create({
-      firstName,
-      lastName,
-      dni,
-      email,
-      phone,
-    });
-    res.status(201).json({
-      message: "Paciente creado exitosamente",
-      patient: patient,
-    });
-  } catch (error) {
-    res
-      .status(400)
-      .json({ error: "Error al crear el paciente: " + error.message });
-  }
-});
+router.post("/", createPatientHandler);
 
 // Obtener un paciente por ID
 router.get("/:id", async (req, res) => {
   try {
     const patient = await Patient.findByPk(req.params.id);
     if (!patient)
-      return res
-        .status(404)
-        .json({
-          message: "Paciente no encontrado con el ID: " + req.params.id,
-        });
+      return res.status(404).json({
+        message: "Paciente no encontrado con el ID: " + req.params.id,
+      });
     res.json(patient);
   } catch (error) {
     res
@@ -65,11 +42,9 @@ router.put("/:id", async (req, res) => {
   try {
     const patient = await Patient.findByPk(req.params.id);
     if (!patient)
-      return res
-        .status(404)
-        .json({
-          message: "Paciente no encontrado con el ID: " + req.params.id,
-        });
+      return res.status(404).json({
+        message: "Paciente no encontrado con el ID: " + req.params.id,
+      });
 
     // Validar los datos antes de actualizar
     await validatePatientData(req.body);
@@ -91,11 +66,9 @@ router.delete("/:id", async (req, res) => {
   try {
     const patient = await Patient.findByPk(req.params.id);
     if (!patient)
-      return res
-        .status(404)
-        .json({
-          message: "Paciente no encontrado con el ID: " + req.params.id,
-        });
+      return res.status(404).json({
+        message: "Paciente no encontrado con el ID: " + req.params.id,
+      });
 
     await patient.destroy();
     res.json({ message: "Paciente eliminado exitosamente" });
