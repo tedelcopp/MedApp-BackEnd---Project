@@ -1,5 +1,6 @@
 const express = require("express");
 const { Patient } = require("../models");
+const connection = require("../config/db"); // Importar conexión
 const { createPatient } = require("../services/patient.service");
 const { createPatientHandler } = require("../controllers/patient.controller");
 const { validatePatientData } = require("../services/patient.service"); // Asegúrate de tener este servicio
