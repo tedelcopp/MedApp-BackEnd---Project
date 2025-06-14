@@ -1,13 +1,12 @@
 const express = require("express");
 const { Patient } = require("../models");
-const connection = require("../config/db"); // Importar conexión
+const connection = require("../config/db"); 
 const { createPatient } = require("../services/patient.service");
 const { createPatientHandler } = require("../controllers/patient.controller");
-const { validatePatientData } = require("../services/patient.service"); // Asegúrate de tener este servicio
+const { validatePatientData } = require("../services/patient.service"); 
 
 const router = express.Router();
 
-// Obtener todos los pacientes
 router.get("/", async (req, res) => {
   try {
     const patients = await Patient.findAll();
@@ -19,10 +18,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Crear un paciente
 router.post("/", createPatientHandler);
 
-// Obtener un paciente por ID
 router.get("/:id", async (req, res) => {
   try {
     const patient = await Patient.findByPk(req.params.id);
@@ -38,7 +35,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Actualizar un paciente
 router.put("/:id", async (req, res) => {
   try {
     const patient = await Patient.findByPk(req.params.id);
@@ -47,7 +43,6 @@ router.put("/:id", async (req, res) => {
         message: "Paciente no encontrado con el ID: " + req.params.id,
       });
 
-    // Validar los datos antes de actualizar
     await validatePatientData(req.body);
 
     await patient.update(req.body);
@@ -62,7 +57,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Eliminar un paciente
 router.delete("/:id", async (req, res) => {
   try {
     const patient = await Patient.findByPk(req.params.id);
