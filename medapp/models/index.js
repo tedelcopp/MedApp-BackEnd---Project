@@ -1,4 +1,3 @@
-// medapp/models/index.js
 import fs from "fs";
 import path from "path";
 import Sequelize from "sequelize";
@@ -28,7 +27,6 @@ if (config.use_env_variable) {
 
 const db = {};
 
-// Cargar modelos dinámicamente
 const files = fs.readdirSync(__dirname).filter((file) => {
   return (
     file.indexOf(".") !== 0 &&
