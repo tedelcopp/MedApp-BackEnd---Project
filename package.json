@@ -2,6 +2,7 @@
   "name": "medapp-backend---project",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "nodemon medapp/server.js",

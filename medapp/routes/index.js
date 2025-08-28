@@ -1,8 +1,10 @@
-const express = require("express");
+import express from "express";
+import patientRoutes from "./patient.routes.js";
+import shiftRoutes from "./shift.routes.js";
+
 const router = express.Router();
 
-const patientRoutes = require("./patient.routes");
-
 router.use("/patients", patientRoutes);
+router.use("/shifts", shiftRoutes);
 
-module.exports = router;
+export default router;

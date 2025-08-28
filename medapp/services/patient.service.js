@@ -1,8 +1,8 @@
-const { Patient } = require("../models");
-const { Op } = require("sequelize");
+import { Patient } from "../models/index.js";
+import { Op } from "sequelize";
 
 // Validación de los datos del paciente.
-const validatePatientData = async (data) => {
+export const validatePatientData = async (data) => {
   const { firstName, lastName, dni, email, phone, age } = data;
 
   if (
@@ -17,8 +17,8 @@ const validatePatientData = async (data) => {
   }
 
   // Validación de la edad (debe estar entre 0 y 120 años).
-  if (isNaN(age) || age < 0 || age > 120) {
-    throw new Error("La edad debe ser un número entre 0 y 120.");
+  if (isNaN(age) || age < 1 || age > 120) {
+    throw new Error("La edad debe ser un número entre 1 y 120.");
   }
 
   // Validación del formato DNI | Entre 8 y 10 dígitos.
@@ -27,8 +27,8 @@ const validatePatientData = async (data) => {
   }
 
   // Validación del teléfono | Entre 8 y 10 dígitos.
-  if (!/^\d{8,10}$/.test(phone)) {
-    throw new Error("El teléfono debe tener 10 dígitos.");
+  if (!/^\+?\d{6,15}$/.test(phone)) {
+    throw new Error("El teléfono debe tener entre 8 y 15 dígitos.");
   }
 
   // Validación del formato Email.
@@ -49,7 +49,7 @@ const validatePatientData = async (data) => {
   }
 };
 
-async function createPatient(data) {
+export async function createPatient(data) {
   try {
     await validatePatientData(data);
     const patient = await Patient.create(data);
@@ -59,7 +59,3 @@ async function createPatient(data) {
     throw new Error(error.message || "No se pudo crear el paciente");
   }
 }
-
-module.exports = {
-  createPatient,
-};
