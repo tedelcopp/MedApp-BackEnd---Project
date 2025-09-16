@@ -6,7 +6,7 @@
 
 ## 📋 | Funcionalidades de la API
 
-* **Gestión de pacientes**: La API permite la creación, consulta, edición y eliminación de historiales de pacientes.
+* **Gestión de pacientes**: La API permite la creación, consulta, edición y eliminación de pacientes.
 * **Organización de citas**: Puntos de acceso para programar, actualizar, visualizar y eliminar citas.
 * **Autenticación y seguridad**: Manejo de autenticación para proteger el acceso a los datos.
 
@@ -58,7 +58,7 @@ Para lograr una estructura modular, escalable y fácil de mantener, este backend
 
 5.  **Inicia el servidor de desarrollo**.
     ```bash
-    npm run dev
+    npm start
     ```
 
 ---
