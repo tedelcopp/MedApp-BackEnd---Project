@@ -1,6 +1,7 @@
-# 🏥 | MedApp: Plataforma de Gestión Médica
+# **🏥 | MedApp: Plataforma de Gestión Médica**
 
-MedApp es una aplicación para facilitar la gestión de historiales médicos y citas en clínicas y consultorios. Su objetivo es optimizar la organización y la experiencia de los profesionales de la salud mediante una interfaz intuitiva y funcionalidades personalizables.
+**MedApp** es una aplicación para facilitar la gestión de historiales médicos y citas en clínicas y consultorios. Su objetivo es optimizar la organización y la experiencia de los profesionales de la salud mediante una interfaz intuitiva y funcionalidades personalizables.
+
 ---
 
 ## 📋 | Funcionalidades de la API
