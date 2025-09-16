@@ -4,7 +4,7 @@
 
 ---
 
-## 📋 | Funcionalidades de la API
+## 📋 | Funcionalidades
 
 * **Gestión de pacientes**: La API permite la creación, consulta, edición y eliminación de pacientes.
 * **Organización de citas**: Puntos de acceso para programar, actualizar, visualizar y eliminar citas.
@@ -70,7 +70,7 @@ Para lograr una estructura modular, escalable y fácil de mantener, este backend
 ---
 ## Contribuciones
 
-Toda colaboración de mejora es bienvenida! Si tienes ideas para mejorar el código existente, no dudes en escribirme.
+Toda colaboración de mejora es bienvenida! Si tenes ideas para mejorar el código existente, no dudes en escribirme.
 
 ---
 ## Contacto
