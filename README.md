@@ -68,18 +68,12 @@ Para lograr una estructura modular, escalable y fácil de mantener, este backend
 ¡Toda colaboración es bienvenida! Si tienes ideas para mejorar la API, no dudes en escribirme.
 
 ---
-
-## Contacto
-
-Si tienes preguntas o deseas más información sobre el proyecto, puedes contactarme a través de mi **LinkedIn**.
-
----
    ## **Accede**
    
 ⚡| Abre [MedApp](https://themedapp.vercel.app/) en tu navegador y empieza a disfrutarla ahora.
 
 ---
+## Contacto
 
-## **Contribuciones**
+Si tienes preguntas o deseas más información sobre el proyecto, puedes contactarme a través de mi **LinkedIn**.
 
-¡Toda colaboración es bienvenida! Si tienes ideas para mejorar la aplicación, no dudes en escribirme.
