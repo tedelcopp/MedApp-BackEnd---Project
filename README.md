@@ -6,9 +6,8 @@
 
 ## 📋 | Funcionalidades de la API
 
-* **Gestión de pacientes**: Endpoints para la creación, consulta, edición y eliminación de historiales.
-* **Organización de citas**: Puntos de acceso para programar, actualizar y visualizar citas.
-* **Recetas y documentos**: Gestión de datos para la generación de documentos médicos.
+* **Gestión de pacientes**: La API permite la creación, consulta, edición y eliminación de historiales de pacientes.
+* **Organización de citas**: Puntos de acceso para programar, actualizar, visualizar y eliminar citas.
 * **Autenticación y seguridad**: Manejo de autenticación para proteger el acceso a los datos.
 
 ---
@@ -18,7 +17,6 @@
 * **Backend**: Node.js, Express.js.
 * **Base de datos**: MySQL2.
 * **ORM**: Sequelize para la gestión de modelos y datos.
-* **Dependencias**: Nodemon para desarrollo, Cors para la comunicación con el frontend, dotenv para variables de entorno.
 
 ---
 
@@ -73,8 +71,12 @@
 Si tienes preguntas o deseas más información sobre el proyecto, puedes contactarme a través de mi **LinkedIn**.
 
 ---
+   ## **Accede**
+   
+⚡| Abre [MedApp](https://themedapp.vercel.app/) en tu navegador y empieza a disfrutarla ahora.
 
-## ⚡ | Accede
+---
 
-El **frontend** de esta aplicación se encuentra en el siguiente repositorio:
-* **[MedApp: Plataforma de Gestión Médica](https://github.com/tedelcopp/MedApp-FrontEnd---Project)**
+## **Contribuciones**
+
+¡Toda colaboración es bienvenida! Si tienes ideas para mejorar la aplicación, no dudes en escribirme.
