@@ -20,10 +20,13 @@
 
 ---
 
-## Estructura del proyecto
+## 🏗️ | Arquitectura del Proyecto
 
-* **Organización modular**: El código está estructurado en módulos (controladores, modelos, rutas) para un desarrollo limpio y escalable.
-* **Configuración centralizada**: Uso de un archivo `.env` para gestionar las variables de entorno de la base de datos y la API.
+Para lograr una estructura modular, escalable y fácil de mantener, este backend está construido con una **arquitectura de tres capas**, organizando el código de manera clara y eficiente.
+
+* **Capa de Rutas (Routes):** Se encarga de manejar las solicitudes HTTP y dirige cada endpoint a su controlador correspondiente.
+* **Capa de Controladores (Controllers):** Procesa la lógica de negocio, realiza validaciones y gestiona la comunicación con la capa de servicios.
+* **Capa de Servicios (Services):** Interactúa directamente con la base de datos, asegurando que el acceso a datos sea flexible y escalable.
 
 ---
 
