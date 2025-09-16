@@ -1,42 +1,53 @@
-# **💾 | MedApp: Backend de Gestión Médica**
+# 🏥 | MedApp: Backend de la Plataforma
 
-# 👨‍⚕️ MedApp: Backend de Gestión Médica
-
-Este es el backend de MedApp, una aplicación web pensada para facilitar la gestión de pacientes y turnos médicos. Su objetivo es optimizar la organización y la experiencia de los profesionales de la salud mediante una interfaz intuitiva y funcionalidades personalizables.
+Este es el backend de MedApp, la aplicación diseñada para optimizar la gestión de historiales médicos y citas en clínicas. Su objetivo es proporcionar una API robusta y eficiente para que el frontend pueda manejar datos de pacientes y turnos de manera fluida y segura.
 
 ---
 
-## 🛠️ Tecnologías
+## 📋 | Funcionalidades de la API
 
-Este proyecto está construido con las siguientes tecnologías:
-
-* **Node.js**: Entorno de ejecución para el backend.
-* **Express**: Framework para la creación de la API REST.
-* **MySQL2**: Driver para la conexión con la base de datos MySQL.
-* **Sequelize**: ORM (Object-Relational Mapper) para la gestión de la base de datos.
-* **dotenv**: Para la gestión de variables de entorno.
-* **Nodemon**: Herramienta de desarrollo que reinicia el servidor automáticamente.
-* **Cors**: Middleware para habilitar solicitudes de recursos de origen cruzado.
+* **Gestión de pacientes**: Endpoints para la creación, consulta, edición y eliminación de historiales.
+* **Organización de citas**: Puntos de acceso para programar, actualizar y visualizar citas.
+* **Recetas y documentos**: Gestión de datos para la generación de documentos médicos.
+* **Autenticación y seguridad**: Manejo de autenticación para proteger el acceso a los datos.
 
 ---
 
-## 🚀 Instalación y Uso
+## 🛠️ | Tecnologías utilizadas
 
-Sigue estos pasos para poner en marcha el proyecto:
+* **Backend**: Node.js, Express.js.
+* **Base de datos**: MySQL2.
+* **ORM**: Sequelize para la gestión de modelos y datos.
+* **Dependencias**: Nodemon para desarrollo, Cors para la comunicación con el frontend, dotenv para variables de entorno.
 
-1.  **Clona el repositorio**:
+---
+
+## Estructura del proyecto
+
+* **Organización modular**: El código está estructurado en módulos (controladores, modelos, rutas) para un desarrollo limpio y escalable.
+* **Configuración centralizada**: Uso de un archivo `.env` para gestionar las variables de entorno de la base de datos y la API.
+
+---
+
+## Instalación y Uso
+
+1.  **Clona este repositorio**.
     ```bash
     git clone <URL_DEL_REPOSITORIO_BACKEND>
     ```
 
-2.  **Instala las dependencias**:
+2.  **Navega al directorio del proyecto**.
+    ```bash
+    cd <directorio_del_proyecto>
+    ```
+
+3.  **Instala las dependencias**.
     ```bash
     npm install
     ```
 
-3.  **Configura las variables de entorno**:
-    Crea un archivo `.env` en la raíz del proyecto y añade las credenciales de tu base de datos:
-
+4.  **Configura las variables de entorno**.
+    Crea un archivo `.env` y agrega las credenciales de tu base de datos:
     ```ini
     DB_HOST=localhost
     DB_USER=tu_usuario
@@ -44,27 +55,26 @@ Sigue estos pasos para poner en marcha el proyecto:
     DB_DATABASE=nombre_de_la_base_de_datos
     ```
 
-4.  **Ejecuta el proyecto**:
+5.  **Inicia el servidor de desarrollo**.
     ```bash
     npm run dev
     ```
-    El servidor se ejecutará en el puerto 3000 por defecto.
 
 ---
 
-## 🌐 Enlaces del Proyecto
+## Contribuciones
 
-* **Repositorio Frontend**: [MedApp-FrontEnd](https://github.com/tedelcopp/MedApp-FrontEnd---Project)
-* **Repositorio Backend**: Este es el repositorio actual.
-
----
-
-## 🤝 Contribuciones
-
-Las contribuciones son bienvenidas. Si encuentras un error o tienes una idea para mejorar, ¡no dudes en abrir un *issue* o enviar un *pull request*!
+¡Toda colaboración es bienvenida! Si tienes ideas para mejorar la API, no dudes en escribirme.
 
 ---
 
-## 📧 Contacto
+## Contacto
 
-(Aquí puedes agregar tu información de contacto si lo deseas, como tu perfil de LinkedIn o tu correo electrónico).
+Si tienes preguntas o deseas más información sobre el proyecto, puedes contactarme a través de mi **LinkedIn**.
+
+---
+
+## ⚡ | Accede
+
+El **frontend** de esta aplicación se encuentra en el siguiente repositorio:
+* **[MedApp: Plataforma de Gestión Médica](https://github.com/tedelcopp/MedApp-FrontEnd---Project)**
