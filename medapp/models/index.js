@@ -44,6 +44,9 @@ for (const file of files) {
   db[model.name] = model;
 }
 
+db.Patient.hasMany(db.Shift);
+db.Shift.belongsTo(db.Patient);
+
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
     db[modelName].associate(db);

@@ -1,15 +1,10 @@
-import { Shift, Patient } from "../models/index.js";
+import { Shift } from "../models/index.js";
 
-const validateShifttData = async (data) => {
+const validateShiftData = async (data) => {
   const { patientId, date, time, phone, note } = data;
 
   if (!patientId) {
     throw new Error("El paciente es requerido.");
-  }
-
-  const patient = await Patient.findByPk(patientId);
-  if (!patient) {
-    throw new Error("El paciente no existe.");
   }
 
   if (!date) {
@@ -38,20 +33,6 @@ const validateShifttData = async (data) => {
 
   if (note && note.length > 255) {
     throw new Error("La nota no puede superar los 255 caracteres.");
-  }
-
-  const existingShift = await Shift.findOne({
-    where: {
-      patientId,
-      date,
-      time,
-    },
-  });
-
-  if (existingShift) {
-    throw new Error(
-      "El paciente ya tiene un turno asignado en esa fecha y hora."
-    );
   }
 };
 
