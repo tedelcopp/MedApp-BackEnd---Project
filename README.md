@@ -30,6 +30,12 @@ Para lograr una estructura modular, escalable y fácil de mantener, este backend
 
 ---
 
+## **Objetivo del proyecto**
+
+Brindar una herramienta eficiente, moderna y fácil de usar para profesionales médicos.
+
+---
+
 ## Instalación y Uso
 
 1.  **Clona este repositorio**.
