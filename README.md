@@ -1,7 +1,6 @@
-# 🏥 | MedApp: Backend de la Plataforma
+# 🏥 | MedApp: Plataforma de Gestión Médica
 
-Este es el backend de MedApp, la aplicación diseñada para optimizar la gestión de historiales médicos y citas en clínicas. Su objetivo es proporcionar una API robusta y eficiente para que el frontend pueda manejar datos de pacientes y turnos de manera fluida y segura.
-
+MedApp es una aplicación para facilitar la gestión de historiales médicos y citas en clínicas y consultorios. Su objetivo es optimizar la organización y la experiencia de los profesionales de la salud mediante una interfaz intuitiva y funcionalidades personalizables.
 ---
 
 ## 📋 | Funcionalidades de la API
