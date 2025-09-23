@@ -22,9 +22,9 @@
 // export default connection;
 
 import "dotenv/config";
-import mysql from "mysql2/promise"; // Usa el conector que admita promesas si tu código lo requiere
+import mysql from "mysql2/promise";
 
-const connection = mysql.createPool({
+const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
@@ -32,13 +32,8 @@ const connection = mysql.createPool({
   port: process.env.DB_PORT,
 });
 
-connection.getConnection((err, conn) => {
-  if (err) {
-    console.error("❌ Error al conectar a la base de datos:", err);
-    return;
-  }
-  console.log("✅ Conexión exitosa a TiDB Cloud");
-  conn.release();
+pool.on("error", (err) => {
+  console.error("❌ Error de conexión al pool de la base de datos:", err);
 });
 
-export default connection;
+export default pool;
