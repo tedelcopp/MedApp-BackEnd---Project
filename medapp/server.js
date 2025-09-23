@@ -1,7 +1,7 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import routes from "./routes/index.js"; // ojo la extensión .js
+import routes from "./routes/index.js";
 
 const app = express();
 const PORT = process.env.PORT || 3003;

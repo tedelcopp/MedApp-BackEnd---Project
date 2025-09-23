@@ -1,22 +1,44 @@
-import mysql from "mysql2";
-import dotenv from "dotenv";
+// import mysql from "mysql2";
+// import dotenv from "dotenv";
 
-dotenv.config();
+// dotenv.config();
 
-const connection = mysql.createConnection({
-  host: process.env.DB_HOST || "localhost",
-  user: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD || "123456",
-  database: process.env.DB_NAME || "medapp",
-  port: process.env.DB_PORT || 3306,
+// const connection = mysql.createConnection({
+//   host: process.env.DB_HOST || "localhost",
+//   user: process.env.DB_USER || "root",
+//   password: process.env.DB_PASSWORD || "123456",
+//   database: process.env.DB_NAME || "medapp",
+//   port: process.env.DB_PORT || 3306,
+// });
+
+// connection.connect((err) => {
+//   if (err) {
+//     console.error("❌ Error al conectar a la base de datos:", err);
+//     return;
+//   }
+//   console.log("✅ Conexión exitosa a MySQL");
+// });
+
+// export default connection;
+
+import "dotenv/config";
+import mysql from "mysql2/promise"; // Usa el conector que admita promesas si tu código lo requiere
+
+const connection = mysql.createPool({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
 });
 
-connection.connect((err) => {
+connection.getConnection((err, conn) => {
   if (err) {
     console.error("❌ Error al conectar a la base de datos:", err);
     return;
   }
-  console.log("✅ Conexión exitosa a MySQL");
+  console.log("✅ Conexión exitosa a TiDB Cloud");
+  conn.release();
 });
 
 export default connection;
