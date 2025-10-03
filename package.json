@@ -5,8 +5,8 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon medapp/server.js",
-    "dev": "nodemon medapp/server.js"
+  "start": "node medapp/server.js", 
+  "dev": "nodemon medapp/server.js" 
   },
   "keywords": [],
   "author": "",
