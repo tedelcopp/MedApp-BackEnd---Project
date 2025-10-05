@@ -1,39 +1,18 @@
 "use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
+  // <--- ASEGÚRATE DE USAR module.exports
   async up(queryInterface, Sequelize) {
     // 1. Creación de la tabla Patients
     await queryInterface.createTable("Patients", {
+      // ... tus columnas de Patients ...
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      firstName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      lastName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      dni: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      phone: {
-        type: Sequelize.STRING,
-      },
-      age: {
-        type: Sequelize.INTEGER,
-      },
+      // ... otras columnas ...
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -44,33 +23,26 @@ module.exports = {
       },
     });
 
-    // 2. Creación de la tabla Shifts (con clave foránea a Patients)
+    // 2. Creación de la tabla Shifts
     await queryInterface.createTable("Shifts", {
+      // ... tus columnas de Shifts ...
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      date: {
-        type: Sequelize.DATEONLY,
-        allowNull: false,
-      },
-      time: {
-        type: Sequelize.TIME,
-        allowNull: false,
-      },
       patientId: {
-        // <--- Clave Foránea
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "Patients", // Nombre de la tabla
+          model: "Patients",
           key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "CASCADE",
       },
+      // ... otras columnas ...
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -83,7 +55,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    // La función 'down' revierte el cambio
     await queryInterface.dropTable("Shifts");
     await queryInterface.dropTable("Patients");
   },
