@@ -2,7 +2,10 @@ import { Patient } from "../models/index.js";
 import { Op } from "sequelize";
 
 export const validatePatientData = async (data) => {
-  const { firstName, lastName, dni, email, phone, age } = data;
+  const { firstName, lastName, dni, email, phone, age } = data; // 🚨 CORRECCIÓN CLAVE: CONVERTIR DNI Y AGE A NÚMEROS DE FORMA SEGURA
+
+  const dniAsNumber = Number(dni);
+  const ageAsNumber = Number(age);
 
   if (
     !firstName ||
@@ -10,17 +13,22 @@ export const validatePatientData = async (data) => {
     !dni ||
     !email ||
     !phone ||
-    !age === undefined
+    age === undefined ||
+    age === null
   ) {
     throw new Error("Todos los campos son requeridos.");
   }
 
-  if (isNaN(age) || age < 1 || age > 120) {
+  if (isNaN(ageAsNumber) || ageAsNumber < 1 || ageAsNumber > 120) {
     throw new Error("La edad debe ser un número entre 1 y 120.");
   }
-
+  // Validar el formato del DNI (aún como string para la regex)
   if (!/^\d{8,10}$/.test(dni)) {
     throw new Error("El DNI debe tener entre 8 y 10 dígitos.");
+  }
+  // Verificar que el DNI sea un número válido antes de usarlo en la DB
+  if (isNaN(dniAsNumber) || dniAsNumber <= 0) {
+    throw new Error("El DNI no es un número válido.");
   }
 
   if (!/^\+?\d{6,15}$/.test(phone)) {
@@ -34,18 +42,25 @@ export const validatePatientData = async (data) => {
 
   const existingPatient = await Patient.findOne({
     where: {
-      [Op.or]: [{ dni }, { email }],
+      [Op.or]: [{ dni: dniAsNumber }, { email }], // 👈 USAMOS dniAsNumber AQUÍ
     },
   });
 
   if (existingPatient) {
     throw new Error("El DNI o email ya están registrados.");
   }
+
+  // 🚨 NOTA: DEBES ASEGURARTE DE QUE LA FUNCIÓN createPatient
+  // O LA RUTA DE EXPRESS USE EL DNI CONVERTIDO A NÚMERO
+  // ANTES DE HACER Patient.create(data).
+  data.dni = dniAsNumber;
+  data.age = ageAsNumber;
 };
 
 export async function createPatient(data) {
   try {
-    await validatePatientData(data);
+    // validatePatientData ahora convierte dni y age a números DENTRO del objeto data
+    await validatePatientData(data); // Patient.create(data) ahora recibe dni y age como números
     const patient = await Patient.create(data);
     return patient;
   } catch (error) {

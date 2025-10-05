@@ -11,7 +11,7 @@ export default (sequelize, DataTypes) => {
         allowNull: false,
       },
       dni: {
-        type: DataTypes.STRING,
+        type: DataTypes.BIGINT,
         allowNull: false,
         unique: true,
       },

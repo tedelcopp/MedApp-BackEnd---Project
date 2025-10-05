@@ -1,18 +1,44 @@
 "use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  // <--- ASEGÚRATE DE USAR module.exports
   async up(queryInterface, Sequelize) {
-    // 1. Creación de la tabla Patients
-    await queryInterface.createTable("Patients", {
-      // ... tus columnas de Patients ...
+    // 1. Creación de la tabla patients
+    await queryInterface.createTable("patients", {
+      // 👈 CORRECCIÓN: Nombre en minúsculas
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      // ... otras columnas ...
+      // --- COLUMNAS DE PATIENTS ---
+      firstName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      dni: {
+        type: Sequelize.BIGINT, // ✅ CORRECCIÓN CLAVE: Usar BIGINT para DNI
+        allowNull: false,
+        unique: true,
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      phone: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      age: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      // ----------------------------
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -23,26 +49,35 @@ module.exports = {
       },
     });
 
-    // 2. Creación de la tabla Shifts
-    await queryInterface.createTable("Shifts", {
-      // ... tus columnas de Shifts ...
+    // 2. Creación de la tabla shifts
+    await queryInterface.createTable("shifts", {
+      // 👈 CORRECCIÓN: Nombre en minúsculas
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      patientId: {
-        type: Sequelize.INTEGER,
+      // --- COLUMNAS DE SHIFTS ---
+      patient: {
+        type: Sequelize.STRING,
         allowNull: false,
-        references: {
-          model: "Patients",
-          key: "id",
-        },
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE",
       },
-      // ... otras columnas ...
+      date: {
+        type: Sequelize.DATEONLY,
+        allowNull: false,
+      },
+      time: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      note: {
+        type: Sequelize.TEXT,
+      },
+      phone: {
+        type: Sequelize.STRING,
+      },
+      // ----------------------------
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -55,7 +90,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Shifts");
-    await queryInterface.dropTable("Patients");
+    await queryInterface.dropTable("shifts"); // 👈 minúsculas
+    await queryInterface.dropTable("patients"); // 👈 minúsculas
   },
 };

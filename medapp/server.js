@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import routes from "./routes/index.js";
+import db from "./models/index.js";
 
 const app = express();
 const PORT = process.env.PORT || 3003;
@@ -42,7 +43,27 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Ocurrió un error inesperado" });
 });
 
-app.listen(PORT, () => {
-  console.log(`🩺 MedApp Backend | Entorno: ${process.env.NODE_ENV || "DEV"}`);
-  console.log(`🌐 Escuchando en http://localhost:${PORT}`);
-});
+// --------------------------------------------------------
+// FUNCIÓN PARA INICIAR EL SERVIDOR Y SINCRONIZAR LA BASE DE DATOS
+// --------------------------------------------------------
+const startServer = async () => {
+  try {
+    await db.sequelize.sync({ alter: true });
+    console.log("✅ Base de datos sincronizada. ¡Tablas listas!");
+
+    app.listen(PORT, () => {
+      console.log(
+        `🩺 MedApp Backend | Entorno: ${process.env.NODE_ENV || "DEV"}`
+      );
+      console.log(`🌐 Escuchando en http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error(
+      "❌ Error al iniciar el servidor o conectar la DB:",
+      error.message
+    );
+    process.exit(1);
+  }
+};
+
+startServer();
