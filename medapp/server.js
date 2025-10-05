@@ -5,10 +5,30 @@ import routes from "./routes/index.js";
 const app = express();
 const PORT = process.env.PORT || 3003;
 
+const allowedOrigins = [
+  "https://themedapp.vercel.app",
+  "https://medapp-backend-project.onrender.com",
+  "http://localhost:3000",
+  "http://localhost:3001",
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors());
 app.use("/api", routes);
 
 app.get("/", (req, res) => {
