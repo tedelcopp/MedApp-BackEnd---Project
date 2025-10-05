@@ -15,6 +15,7 @@ const pool = mysql.createPool({
 
   ssl: {
     ca: TlsCert,
+    minVersion: "TLSv1.2",
     rejectUnauthorized: true,
   },
 
