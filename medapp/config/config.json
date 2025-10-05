@@ -1,23 +1,28 @@
 {
-    "development": {
-      "username": "root",
-      "password": "123456",
-      "database": "medapp",
-      "host": "localhost",
-      "dialect": "mysql"
-    },
-    "test": {
-      "username": "root",
-      "password": null,
-      "database": "database_test",
-      "host": "localhost",
-      "dialect": "mysql"
-    },
-    "production": {
-      "username": "root",
-      "password": null,
-      "database": "database_production",
-      "host": "localhost",
-      "dialect": "mysql"
+  "development": {
+    "username": "neondb_owner", 
+    "password": "npg_J3V1tIawrEgd",
+    "database": "MedApp", 
+    "host": "ep-long-mud-adlfqfuo-pooler.c-2.us-east-1.aws.neon.tech", 
+    "port": 5432, 
+    "dialect": "postgres", 
+    "dialectOptions": {
+      
+      "ssl": {
+        "require": true, 
+        "rejectUnauthorized": false
+      }
     }
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL",
+    "dialect": "postgres" 
   }
+}

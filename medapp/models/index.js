@@ -15,6 +15,15 @@ const config = configFile[env];
 
 let sequelize;
 if (config.use_env_variable) {
+  if (process.env.NODE_ENV === "production") {
+    config.dialectOptions = {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false,
+      },
+    };
+  }
+
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
   sequelize = new Sequelize(
