@@ -1,7 +1,9 @@
 import express from "express";
 import cors from "cors";
 import routes from "./routes/index.js";
-import db from "./models/index.js";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const db = require("./models");
 
 const app = express();
 const PORT = process.env.PORT || 3003;
@@ -43,13 +45,10 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Ocurrió un error inesperado" });
 });
 
-// --------------------------------------------------------
-// FUNCIÓN PARA INICIAR EL SERVIDOR Y SINCRONIZAR LA BASE DE DATOS
-// --------------------------------------------------------
 const startServer = async () => {
   try {
     await db.sequelize.sync({ force: true });
-    console.log("✅ Base de datos sincronizada. ¡Tablas listas!");
+    console.log("✅ Base de datos FORZADA y sincronizada. ¡Esquema correcto!");
 
     app.listen(PORT, () => {
       console.log(
