@@ -48,7 +48,7 @@ app.use((err, req, res, next) => {
 // --------------------------------------------------------
 const startServer = async () => {
   try {
-    await db.sequelize.sync({ alter: true });
+    await db.sequelize.sync({ force: true });
     console.log("✅ Base de datos sincronizada. ¡Tablas listas!");
 
     app.listen(PORT, () => {
