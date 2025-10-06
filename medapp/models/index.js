@@ -1,68 +1,64 @@
-import express from "express";
-import cors from "cors";
-import routes from "./routes/index.js";
-import { sequelizeInstance } from "./models/index.js";
+import fs from "fs";
+import path from "path";
+import Sequelize from "sequelize";
+import process from "process";
+import { fileURLToPath, pathToFileURL } from "url";
 
-const app = express();
-const PORT = process.env.PORT || 3003;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const allowedOrigins = [
-  "https://themedapp.vercel.app",
-  "https://medapp-backend-project.onrender.com",
-  "http://localhost:3000",
-  "http://localhost:3001",
-];
+const configPath = path.join(__dirname, "../config/config.json");
+const configFile = JSON.parse(fs.readFileSync(configPath, "utf-8"));
 
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-};
+const env = process.env.NODE_ENV || "development";
+const config = configFile[env];
 
-app.use(cors(corsOptions));
+let sequelize;
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new Sequelize(
+    config.database,
+    config.username,
+    config.password,
+    config
+  );
+}
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+const db = {};
 
-app.use("/api", routes);
-
-app.get("/", (req, res) => {
-  res.send(
-    "MedApp Backend | Servidor en funcionamiento | Buenos Aires, Argentina."
+const files = fs.readdirSync(__dirname).filter((file) => {
+  return (
+    file.indexOf(".") !== 0 &&
+    file !== path.basename(__filename) &&
+    file.slice(-3) === ".js" &&
+    !file.includes(".test.js")
   );
 });
 
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({ error: "Ocurrió un error inesperado" });
+for (const file of files) {
+  const moduleURL = pathToFileURL(path.join(__dirname, file)).href;
+  const module = await import(moduleURL);
+
+  const model = module.default(sequelize, Sequelize.DataTypes);
+  db[model.name] = model;
+}
+
+db.Patient.hasMany(db.Shift);
+db.Shift.belongsTo(db.Patient);
+
+Object.keys(db).forEach((modelName) => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
 });
 
-const startServer = async () => {
-  try {
-    await sequelizeInstance.sync({ force: true });
-    console.log(
-      "✅ Base de datos FORZADA y sincronizada. ¡Esquema correcto aplicado!"
-    );
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
-    app.listen(PORT, () => {
-      console.log(
-        `🩺 MedApp Backend | Entorno: ${process.env.NODE_ENV || "DEV"}`
-      );
-      console.log(`🌐 Escuchando en http://localhost:${PORT}`);
-    });
-  } catch (error) {
-    console.error(
-      "❌ Error al iniciar el servidor o conectar la DB:",
-      error.message
-    );
-    process.exit(1);
-  }
-};
-
-startServer();
+export const {
+  Patient,
+  Shift,
+  sequelize: sequelizeInstance,
+  Sequelize: SequelizeClass,
+} = db;
