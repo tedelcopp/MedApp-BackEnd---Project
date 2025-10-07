@@ -64,6 +64,7 @@ export const validatePatientData = async (data, idToExclude = null) => {
 
   // Si estamos actualizando, ignoramos el ID del paciente actual en la búsqueda.
   if (idToExclude) {
+    // Para que Sequelize no mezcle esto con Op.or, lo incluimos fuera del Op.or.
     whereConditions.id = { [Op.ne]: idToExclude };
   }
 
@@ -74,17 +75,26 @@ export const validatePatientData = async (data, idToExclude = null) => {
   // 8. Validación de Duplicados
   if (existingPatient) {
     // Si encontramos un paciente existente, determinamos si es por DNI o Email
-    if (existingPatient.dni === dniAsNumber) {
+    // Usamos toString() para asegurar la comparación si uno es BigInt de la DB y el otro es Number JS
+    const existingDniString = String(existingPatient.dni);
+    const newDniString = String(dniAsNumber);
+
+    if (
+      existingDniString === newDniString &&
+      existingPatient.id !== idToExclude
+    ) {
       throw new Error(
-        "ERROR_DNI_DUPLICADO: El DNI ya está registrado por otro paciente."
+        "ERROR_DNI_DUPLICADO: El DNI ya está registrado por el paciente ID " +
+          existingPatient.id
       );
     }
-    if (existingPatient.email === email) {
+    if (existingPatient.email === email && existingPatient.id !== idToExclude) {
       throw new Error(
-        "ERROR_EMAIL_DUPLICADO: El email ya está registrado por otro paciente."
+        "ERROR_EMAIL_DUPLICADO: El email ya está registrado por el paciente ID " +
+          existingPatient.id
       );
     }
-    // Caso de seguridad, si pasa el Op.or pero no coincide exactamente por alguna razón
+    // Si se encontró algo que coincide, pero no podemos determinar exactamente qué, disparamos el error general
     throw new Error(
       "ERROR_DUPLICADO_GENERAL: El DNI o email ya están registrados."
     );
@@ -105,7 +115,7 @@ export async function createPatient(data) {
     return patient;
   } catch (error) {
     console.error("Error al crear paciente:", error);
-    // Devolvemos el mensaje de error específico, incluyendo los nuevos códigos (ERROR_...)
+    // Devolvemos el mensaje de error específico (ERROR_...)
     throw new Error(error.message || "No se pudo crear el paciente");
   }
 }
