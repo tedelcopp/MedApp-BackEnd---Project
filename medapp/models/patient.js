@@ -2,6 +2,11 @@ export default (sequelize, DataTypes) => {
   const Patient = sequelize.define(
     "Patient",
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
       firstName: {
         type: DataTypes.STRING,
         allowNull: false,
