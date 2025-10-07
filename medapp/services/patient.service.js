@@ -57,47 +57,41 @@ export const validatePatientData = async (data, idToExclude = null) => {
     throw new Error("ERROR_EMAIL_FORMATO: El formato del email no es válido.");
   }
 
-  // 7. Configuración de la búsqueda de duplicados (DNI o email)
-  const whereConditions = {
-    [Op.or]: [{ dni: dniAsNumber }, { email }],
-  };
-
-  // Si estamos actualizando, ignoramos el ID del paciente actual en la búsqueda.
-  if (idToExclude) {
-    // Para que Sequelize no mezcle esto con Op.or, lo incluimos fuera del Op.or.
-    whereConditions.id = { [Op.ne]: idToExclude };
-  }
-
+  // 7. Configuración de la búsqueda de duplicados (BÚSQUEDA SIMPLE, SIN EXCLUSIÓN DE ID AÚN)
   const existingPatient = await Patient.findOne({
-    where: whereConditions,
+    where: {
+      [Op.or]: [{ dni: dniAsNumber }, { email }],
+    },
   });
 
-  // 8. Validación de Duplicados
+  // 8. Validación de Duplicados (FILTRANDO EN JAVASCRIPT)
   if (existingPatient) {
-    // Si encontramos un paciente existente, determinamos si es por DNI o Email
-    // Usamos toString() para asegurar la comparación si uno es BigInt de la DB y el otro es Number JS
-    const existingDniString = String(existingPatient.dni);
-    const newDniString = String(dniAsNumber);
+    // Si estamos en modo edición (idToExclude) Y el paciente encontrado es el mismo que estamos editando,
+    // NO es un duplicado, y simplemente salimos del if.
+    if (idToExclude && existingPatient.id === idToExclude) {
+      // El paciente existente es el mismo que estamos actualizando, no hay duplicado.
+    } else {
+      // En este punto, SÍ es un duplicado de otro paciente (o de sí mismo en modo creación)
+      const existingDniString = String(existingPatient.dni);
+      const newDniString = String(dniAsNumber);
 
-    if (
-      existingDniString === newDniString &&
-      existingPatient.id !== idToExclude
-    ) {
+      if (existingDniString === newDniString) {
+        throw new Error(
+          "ERROR_DNI_DUPLICADO: El DNI ya está registrado por el paciente ID " +
+            existingPatient.id
+        );
+      }
+      if (existingPatient.email === email) {
+        throw new Error(
+          "ERROR_EMAIL_DUPLICADO: El email ya está registrado por el paciente ID " +
+            existingPatient.id
+        );
+      }
+      // Fallback si la coincidencia es ambigua
       throw new Error(
-        "ERROR_DNI_DUPLICADO: El DNI ya está registrado por el paciente ID " +
-          existingPatient.id
+        "ERROR_DUPLICADO_GENERAL: El DNI o email ya están registrados."
       );
     }
-    if (existingPatient.email === email && existingPatient.id !== idToExclude) {
-      throw new Error(
-        "ERROR_EMAIL_DUPLICADO: El email ya está registrado por el paciente ID " +
-          existingPatient.id
-      );
-    }
-    // Si se encontró algo que coincide, pero no podemos determinar exactamente qué, disparamos el error general
-    throw new Error(
-      "ERROR_DUPLICADO_GENERAL: El DNI o email ya están registrados."
-    );
   }
 
   // 9. SANITIZACIÓN: Aseguramos que el objeto de datos use números para la DB
