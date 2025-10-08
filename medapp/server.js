@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import routes from "./routes/index.js";
-import { sequelizeInstance } from "./models/index.js"; // 🚨 IMPORTAMOS LA INSTANCIA DE SEQUELIZE
+import { sequelizeInstance } from "./models/index.js";
 
 const app = express();
 const PORT = process.env.PORT || 3003;
@@ -23,12 +23,9 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: "Ocurrió un error inesperado" });
 });
 
-// 🚨 FUNCIÓN PARA CONECTAR LA BASE DE DATOS E INICIAR EL SERVIDOR
 const startServer = async () => {
   try {
-    // 🚨 SINCRONIZACIÓN FORZADA (force: true)
-    // Esto recreará las tablas que borraste con los tipos de datos corregidos (DNI como BIGINT).
-    await sequelizeInstance.sync({ force: true });
+    await sequelizeInstance.sync({ force: false });
     console.log("✅ Base de datos sincronizada y tablas creadas con éxito.");
 
     app.listen(PORT, () => {
@@ -42,10 +39,8 @@ const startServer = async () => {
       "❌ No se pudo iniciar el servidor debido a un error de DB:",
       error
     );
-    // Agregamos un detalle del error de conexión
     throw new Error(`Error al conectar la DB: ${error.message}`);
   }
 };
 
-// 🚨 INICIAMOS EL SERVIDOR CON LA FUNCIÓN DE CONEXIÓN
 startServer();
