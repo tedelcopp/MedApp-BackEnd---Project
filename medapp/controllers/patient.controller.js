@@ -17,8 +17,7 @@ export const getPatientsHandler = async (req, res) => {
 
 export const createPatientHandler = async (req, res) => {
   try {
-    // Creamos una copia de los datos para la creación
-    const patientData = { ...req.body }; // El servicio (createPatient) se encarga de llamar a validatePatientData y convertir DNI/Age a número.
+    const patientData = { ...req.body };
     const newPatient = await createPatient(patientData);
     res.status(201).json(newPatient);
   } catch (error) {
@@ -46,7 +45,7 @@ export const getPatientByIdHandler = async (req, res) => {
 
 export const updatePatient = async (req, res) => {
   try {
-    const patientId = req.params.id; // 1. Obtenemos el ID del paciente a actualizar
+    const patientId = req.params.id;
     const patient = await Patient.findByPk(patientId);
     if (!patient) {
       return res.status(404).json({
@@ -54,14 +53,10 @@ export const updatePatient = async (req, res) => {
       });
     }
 
-    // Creamos una copia de los datos para la actualización
     const updateData = { ...req.body };
 
-    // 🚨 AJUSTE CLAVE: Llamamos al servicio de validación
-    // Le pasamos los datos Y el ID del paciente actual (para que se excluya de la verificación de duplicados).
     await validatePatientData(updateData, patientId);
 
-    // updateData ahora contiene el DNI y la edad como números enteros, gracias al servicio.
     await patient.update(updateData);
 
     res.json({
