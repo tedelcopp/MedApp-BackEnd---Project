@@ -57,44 +57,53 @@ export const validatePatientData = async (data, idToExclude = null) => {
     throw new Error("ERROR_EMAIL_FORMATO: El formato del email no es válido.");
   }
 
-  // 7. Configuración de la búsqueda de duplicados (BÚSQUEDA SIMPLE, SIN EXCLUSIÓN DE ID AÚN)
+  // --- CAMBIOS REALIZADOS AQUÍ (Pasos 7 y 8) ---
+
+  // 7. Configuración de la exclusión: si se proporciona un ID, se agrega la condición
+  // [Op.ne] (Not Equal) a la cláusula where.
+  const idExclusionCondition = idToExclude
+    ? { id: { [Op.ne]: idToExclude } }
+    : {};
+
+  // 8. Búsqueda de Duplicados
   const existingPatient = await Patient.findOne({
     where: {
-      [Op.or]: [{ dni: dniAsNumber }, { email }],
+      [Op.and]: [
+        // Excluir el paciente que estamos editando (si aplica)
+        idExclusionCondition,
+        // Buscar DNI o Email duplicado
+        {
+          [Op.or]: [{ dni: dniAsNumber }, { email }],
+        },
+      ],
     },
   });
 
-  // 8. Validación de Duplicados (FILTRANDO EN JAVASCRIPT)
+  // 9. Validación de Duplicados (ahora si existingPatient existe, ES un duplicado de OTRA persona)
   if (existingPatient) {
-    // Si estamos en modo edición (idToExclude) Y el paciente encontrado es el mismo que estamos editando,
-    // NO es un duplicado, y simplemente salimos del if.
-    if (idToExclude && existingPatient.id === idToExclude) {
-      // El paciente existente es el mismo que estamos actualizando, no hay duplicado.
-    } else {
-      // En este punto, SÍ es un duplicado de otro paciente (o de sí mismo en modo creación)
-      const existingDniString = String(existingPatient.dni);
-      const newDniString = String(dniAsNumber);
+    const isDniDuplicated = existingPatient.dni === dniAsNumber;
+    const isEmailDuplicated = existingPatient.email === email;
 
-      if (existingDniString === newDniString) {
-        throw new Error(
-          "ERROR_DNI_DUPLICADO: El DNI ya está registrado por el paciente ID " +
-            existingPatient.id
-        );
-      }
-      if (existingPatient.email === email) {
-        throw new Error(
-          "ERROR_EMAIL_DUPLICADO: El email ya está registrado por el paciente ID " +
-            existingPatient.id
-        );
-      }
-      // Fallback si la coincidencia es ambigua
+    if (isDniDuplicated) {
       throw new Error(
-        "ERROR_DUPLICADO_GENERAL: El DNI o email ya están registrados."
+        "ERROR_DNI_DUPLICADO: El DNI ya está registrado por el paciente ID " +
+          existingPatient.id
       );
     }
+    if (isEmailDuplicated) {
+      throw new Error(
+        "ERROR_EMAIL_DUPLICADO: El email ya está registrado por el paciente ID " +
+          existingPatient.id
+      );
+    }
+    // Fallback (aunque no debería ocurrir si las condiciones anteriores son correctas)
+    throw new Error(
+      "ERROR_DUPLICADO_GENERAL: El DNI o email ya están registrados."
+    );
   }
+  // --- FIN DE LOS CAMBIOS ---
 
-  // 9. SANITIZACIÓN: Aseguramos que el objeto de datos use números para la DB
+  // 10. SANITIZACIÓN: Aseguramos que el objeto de datos use números para la DB
   data.dni = dniAsNumber;
   data.age = ageAsNumber;
 };
@@ -102,6 +111,7 @@ export const validatePatientData = async (data, idToExclude = null) => {
 export async function createPatient(data) {
   try {
     // Se ejecuta validatePatientData (que convierte DNI a número y valida)
+    // Aquí validatePatientData se llama sin idToExclude (null), por lo que no se excluye a nadie.
     await validatePatientData(data);
 
     // Y aquí se crea el paciente con el DNI ya convertido
