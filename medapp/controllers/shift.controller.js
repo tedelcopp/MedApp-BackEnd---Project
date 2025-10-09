@@ -14,12 +14,18 @@ export const createShiftHandler = async (req, res) => {
   try {
     const { patient, date, time, phone, note } = req.body;
 
+    // 🚨 CORRECCIÓN EN BÚSQUEDA: Buscar al paciente por nombre completo exacto
+    // Maneja nombres y apellidos compuestos
+    const patientParts = patient.split(" ");
+    const firstName = patientParts[0];
+    // Se asegura de que el resto de las partes formen el apellido
+    const lastName = patientParts.slice(1).join(" ");
+
     // 1. Busca al paciente por su nombre completo
     const existingPatient = await Patient.findOne({
       where: {
-        // La lógica de búsqueda debe coincidir con cómo se guarda el nombre del paciente
-        firstName: patient.split(" ")[0],
-        lastName: patient.split(" ")[1],
+        firstName: firstName,
+        lastName: lastName,
       },
     });
 
@@ -62,9 +68,18 @@ export const updateShiftHandler = async (req, res) => {
     // Lógica para actualizar el patientId si el nombre del paciente ha cambiado
     let updatedPatientId = shift.patientId;
     if (patient) {
+      // Mejorar la búsqueda para el apellido compuesto si aplica
+      const patientParts = patient.split(" ");
+      const firstName = patientParts[0];
+      const lastName = patientParts.slice(1).join(" ");
+
       const existingPatient = await Patient.findOne({
-        where: { firstName: patient },
+        where: {
+          firstName: firstName,
+          lastName: lastName,
+        },
       });
+
       if (!existingPatient) {
         return res.status(404).json({ error: "Paciente no encontrado." });
       }
@@ -78,7 +93,14 @@ export const updateShiftHandler = async (req, res) => {
       phone,
       note,
     };
-    validateShiftData(shiftData);
+
+    // Validamos la data final
+    const validationData = {
+      patientId: updatedPatientId,
+      date: date || shift.date,
+      time: time || shift.time,
+    };
+    validateShiftData(validationData);
 
     const updatedShift = await shift.update(shiftData);
     res.status(200).json(updatedShift);
@@ -93,16 +115,32 @@ export const getAllShiftsHandler = async (req, res) => {
     const shifts = await Shift.findAll({
       include: {
         model: Patient,
-        as: "Patient",
+        as: "PatientData", // <--- DEBE COINCIDIR CON EL ALIAS EN index.js
         attributes: ["firstName", "lastName"],
       },
     });
 
     const formattedShifts = shifts.map((shift) => {
-      const patientName = `${shift.Patient.firstName} ${shift.Patient.lastName}`;
+      // 🚨 CORRECCIÓN CLAVE: Usamos el alias 'PatientData' para acceder a la data
+      const patientInfo = shift.PatientData;
+
+      // Manejo de seguridad en caso de que la relación no se cargue
+      if (!patientInfo) {
+        console.warn(`Shift ID ${shift.id} tiene datos de paciente faltantes.`);
+        return {
+          ...shift.toJSON(),
+          patient: "Paciente Desconocido (ID: " + shift.patientId + ")",
+        };
+      }
+
+      const patientName = `${patientInfo.firstName} ${patientInfo.lastName}`;
+
       return {
         ...shift.toJSON(),
+        // Generamos el campo 'patient' para el frontend
         patient: patientName,
+        // Eliminamos el objeto 'PatientData' anidado para limpiar la respuesta JSON
+        PatientData: undefined,
       };
     });
 

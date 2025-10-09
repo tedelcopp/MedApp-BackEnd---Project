@@ -44,8 +44,22 @@ for (const file of files) {
   db[model.name] = model;
 }
 
+// ----------------------------------------------------
+// 🚨 CORRECCIÓN CLAVE AQUÍ: Definir foreignKey y alias
+// ----------------------------------------------------
+
+// 1. Patient tiene muchos Shifts (no necesita cambios)
 db.Patient.hasMany(db.Shift);
-db.Shift.belongsTo(db.Patient);
+
+// 2. Shift pertenece a Patient
+// Definimos foreignKey: 'patientId' (camelCase) para coincidir con tu lógica de DB
+// Definimos el alias 'PatientData' para usarlo en el include
+db.Shift.belongsTo(db.Patient, {
+  foreignKey: "patientId",
+  as: "PatientData",
+});
+
+// ----------------------------------------------------
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
