@@ -15,7 +15,7 @@
   
 ---
 
-## 🛠️ | **Tecnologías utilizadas**
+## ⚙️ | **Tecnologías utilizadas**
 * **Lenguaje**: JavaScript ➤ Node.js.
 * **Framework**: Express.js.
 * **ORM**: Sequelize.js.
