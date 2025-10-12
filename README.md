@@ -4,7 +4,7 @@
 
 ---
 
-## **✨ | Características:**
+## **✨ | Características**
 
 - **📋 Gestión de pacientes:** Crea, actualiza y elimina perfiles de pacientes de forma eficiente, manteniendo un registro médico organizado y accesible.
 - **📅 Organización de turnos médicos:** Programa, visualiza y gestiona todos los turnos médicos con facilidad.
