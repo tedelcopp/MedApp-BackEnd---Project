@@ -63,10 +63,15 @@ Para lograr una estructura modular, escalable y fácil de mantener, este backend
     npm start
     ```
 ---
-## 🚀 | **API Pública**
+## 🌐 | **API Pública**
 
-Podés acceder a traves de: [https://themedapp.vercel.app](https://medapp-backend-project.onrender.com/api)
+Podés acceder a traves de: [[https://themedapp.vercel.app](https://medapp-backend-project.onrender.com)](https://medapp-backend-project.onrender.com/)
 
+Al acceder a la URL principal, recibirás el mensaje de confirmación: 
+
+  ```bash
+**"MedApp Backend | Servidor en funcionamiento | Buenos Aires, Argentina."**
+ ```
 ---
 
 ---
