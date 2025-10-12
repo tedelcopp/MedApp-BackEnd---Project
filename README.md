@@ -18,7 +18,7 @@
 ## 🛠️ | **Tecnologías utilizadas**
 * **Lenguaje**: JavaScript ➤ Node.js.
 * **Framework**: Express.js.
-- **Base de datos:** [PostgreSQL](https://www.postgresql.org/) ➤ Hospedada en [Neon](https://neon.tech/).
+* **Base de datos:** [PostgreSQL](https://www.postgresql.org/) ➤ Hospedada en [Neon](https://neon.tech/).
 * **Alojamiento**: Render.
 ---
 
@@ -36,12 +36,12 @@ Para lograr una estructura modular, escalable y fácil de mantener, este backend
 
 1.  **Clona este repositorio**.
     ```bash
-    git clone <URL_DEL_REPOSITORIO_BACKEND>
+    git clone [<URL_DEL_REPOSITORIO_BACKEND>](https://github.com/tedelcopp/MedApp-BackEnd---Project.git)
     ```
 
 2.  **Navega al directorio del proyecto**.
     ```bash
-    cd <directorio_del_proyecto>
+    cd MedApp-BackEnd---Project
     ```
 
 3.  **Instala las dependencias**.
@@ -62,6 +62,12 @@ Para lograr una estructura modular, escalable y fácil de mantener, este backend
     ```bash
     npm start
     ```
+---
+## 🚀 | **API Pública**
+
+Podés acceder a traves de: [https://themedapp.vercel.app](https://medapp-backend-project.onrender.com/api)
+
+---
 
 ---
 ## 🚀 | **Acceso**
