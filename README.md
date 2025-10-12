@@ -70,7 +70,7 @@ Podés acceder a traves de https://medapp-backend-project.onrender.com
 Si todo funciona bien, podras ver el mensaje de confirmación en pantalla:  
 
   ```bash
-**"MedApp Backend | Servidor en funcionamiento | Buenos Aires, Argentina."**
+"MedApp Backend | Servidor en funcionamiento | Buenos Aires, Argentina."
  ```
 ---
 
