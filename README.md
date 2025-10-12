@@ -15,7 +15,7 @@
   
 ---
 
-## 🛠️ | Tecnologías utilizadas
+## 🛠️ **Tecnologías utilizadas**
 
 * **Backend**: Node.js, Express.js.
 * **Base de datos**: MySQL2.
@@ -23,7 +23,7 @@
 
 ---
 
-## 🏗️ | Arquitectura del Proyecto
+## 🏗️ **Arquitectura del Proyecto**
 
 Para lograr una estructura modular, escalable y fácil de mantener, este backend está construido con una **arquitectura de tres capas**, organizando el código de manera clara y eficiente.
 
@@ -33,13 +33,7 @@ Para lograr una estructura modular, escalable y fácil de mantener, este backend
 
 ---
 
-## **Objetivo del proyecto**
-
-Brindar una herramienta eficiente, moderna y fácil de usar para profesionales médicos.
-
----
-
-## Instalación y Uso
+## ⚙️ **Instalación y Uso**
 
 1.  **Clona este repositorio**.
     ```bash
