@@ -68,10 +68,9 @@ Brindar una herramienta eficiente, moderna y fácil de usar para profesionales m
     ```
 
 ---
+## **Acceso**
 
-   ## **Accede**
-   
-⚡| Abre [MedApp](https://themedapp.vercel.app/) en tu navegador y empieza a disfrutarla ahora.
+Podés ver la aplicación desplegada en: https://themedapp.vercel.app
 
 ---
 
