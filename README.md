@@ -28,9 +28,9 @@
 
 Para lograr una estructura modular, escalable y fácil de mantener, este backend está construido con una **arquitectura de tres capas**, organizando el código de manera clara y eficiente.
 
-* 🚦 **Routes:**  Contiene archivos que definen los endpoints de la API y se encarga de manejar las solicitudes HTTP (GET, POST, PUT, DELETE), dirigiendo cada petición a su controlador correspondiente.
-* 🧠 **Controllers:** Es el punto de entrada de cada solicitud. Su rol principal es manejar los parámetros de la petición, invocar las funciones de negocio de Services y responder al cliente con el código de estado HTTP adecuado (201 Created, 404 Not Found, etc.), incluyendo el manejo de errores.
-* 🛡️ **Services:** Contiene la lógica de negocio principal. **Se alojan las funciones críticas de validación** que comprueban formato, rangos y unicidad de datos **antes** de cualquier interacción con la base de datos. Esta capa asegura que el acceso y manipulación de datos sea **flexible, seguro y escalable**.
+* 🚦 | **Routes:**  Contiene archivos que definen los endpoints de la API y se encarga de manejar las solicitudes HTTP (GET, POST, PUT, DELETE), dirigiendo cada petición a su controlador correspondiente.
+* 🧠 | **Controllers:** Es el punto de entrada de cada solicitud. Su rol principal es manejar los parámetros de la petición, invocar las funciones de negocio de Services y responder al cliente con el código de estado HTTP adecuado (201 Created, 404 Not Found, etc.), incluyendo el manejo de errores.
+* 🛡️ | **Services:** Contiene la lógica de negocio principal. **Se alojan las funciones críticas de validación** que comprueban formato, rangos y unicidad de datos **antes** de cualquier interacción con la base de datos. Esta capa asegura que el acceso y manipulación de datos sea **flexible, seguro y escalable**.
   
 ➕ | **Estructura Adicional:**
 * **`models`:** Contiene la definición de esquemas de datos.
