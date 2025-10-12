@@ -30,7 +30,7 @@ Para lograr una estructura modular, escalable y fácil de mantener, este backend
 
 * **Capa de Rutas (Routes):** Se encarga de manejar las solicitudes HTTP y dirige cada endpoint a su controlador correspondiente.
 * **Capa de Controladores (Controllers):** Procesa la lógica de negocio, realiza validaciones y gestiona la comunicación con la capa de servicios.
-* **Services:** Contiene la lógica de negocio principal. **Se alojan las funciones críticas de validación** que comprueban formato, rangos y unicidad de datos (DNI, email, edad) **antes** de cualquier interacción con la base de datos (a través de Sequelize). Esta capa asegura que el acceso y manipulación de datos sea **flexible, seguro y escalable**.
+* **Services:** Contiene la lógica de negocio principal. **Se alojan las funciones críticas de validación** que comprueban formato, rangos y unicidad de datos **antes** de cualquier interacción con la base de datos. Esta capa asegura que el acceso y manipulación de datos sea **flexible, seguro y escalable**.
   
 ➕ | **Estructura Adicional:**
 * **`models`:** Contiene la definición de esquemas de datos.
