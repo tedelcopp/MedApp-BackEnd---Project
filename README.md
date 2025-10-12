@@ -71,18 +71,18 @@ Brindar una herramienta eficiente, moderna y fácil de usar para profesionales m
     ```
 
 ---
-## **Acceso**
+## 🚀 **Acceso**
 
 Podés ver la aplicación desplegada en: https://themedapp.vercel.app
 
 ---
 
-## **Contribuciones**
+## 🤝 **Contribuciones**
 
 Toda colaboración de mejora es bienvenida. Si tenes ideas para mejorar el código actual, no dudes en escribirme.
 
 ---
 
-## **Contacto**
+## 📬 **Contacto**
 
 Podés contactarme a través de mi [LinkedIn](https://www.linkedin.com/in/edelcopp/) o por correo electrónico a [tomas.edelcopp@gmail.com](mailto:tomas.edelcopp@gmail.com).
