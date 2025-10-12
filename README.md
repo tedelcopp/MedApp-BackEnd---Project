@@ -1,51 +1,54 @@
 # **🏥 | MedApp: Plataforma de Gestión Médica**
 
-**MedApp** es una aplicación para facilitar la gestión de historiales médicos y citas en clínicas y consultorios. Su objetivo es optimizar la organización y la experiencia de los profesionales de la salud mediante una interfaz intuitiva y funcionalidades personalizables.
+**MedApp** es una aplicación diseñada para asistir en la gestión de registros de pacientes y la organización de turnos en clínicas y consultorios. La plataforma se centra en proporcionar una herramienta que facilite los procesos administrativos cotidianos del profesional de la salud. Para ello, incorpora una interfaz clara y estructurada, orientada a las necesidades operativas de la consulta profesional.
 
 ---
 
-## 📋 | Funcionalidades
+## **✨ | Características**
 
-* **Gestión de pacientes**: La API permite la creación, consulta, edición y eliminación de pacientes.
-* **Organización de citas**: Puntos de acceso para programar, actualizar, visualizar y eliminar citas.
-* **Autenticación y seguridad**: Manejo de autenticación para proteger el acceso a los datos.
+- **📋 Gestión de pacientes:** Crea, actualiza y elimina perfiles de pacientes de forma eficiente, manteniendo un registro médico organizado y accesible.
+- **📅 Organización de turnos médicos:** Programa, visualiza y gestiona todos los turnos médicos con facilidad.
+- **🌗 Modo oscuro/claro:** Alterna entre el Modo Oscuro y el Modo Claro para una visualización cómoda y personalizable, ajustándose a cualquier condición de luz y preferencia visual.
+- **📊 Panel de administración:** Navega con fluidez a través de las secciones clave: Inicio, Pacientes, Turnos y Configuración.
+- **💾 Persistencia de datos:** Toda la información queda permanentemente registrada en la base de datos, asegurando la integridad, disponibilidad y trazabilidad de los datos.
+- **📱 Diseño responsive:** Accede y utiliza la aplicación desde cualquier dispositivo (móvil, tablet o escritorio), garantizando una experiencia visual y funcional en cualquier tamaño de pantalla.
+  
+---
+
+## ⚙️ | **Tecnologías utilizadas**
+* **Lenguaje**: JavaScript ➤ Node.js.
+* **Framework**: Express.js.
+* **ORM**: Sequelize.js.
+* **Dependencias**: Manejo de **CORS** y **dotenv**.
+* **Base de datos:** [PostgreSQL](https://www.postgresql.org/) ➤ Hospedada en [Neon](https://neon.tech/).
+* **Alojamiento** ➤ Hospedado en [Render](https://medapp-backend-project.onrender.com).
+* **FrontEnd:** [tedelcopp/MedApp-FrontEnd---Project](https://github.com/tedelcopp/MedApp-FrontEnd---Project) ➤ Hospedado en [Vercel](https://vercel.com/).
 
 ---
 
-## 🛠️ | Tecnologías utilizadas
-
-* **Backend**: Node.js, Express.js.
-* **Base de datos**: MySQL2.
-* **ORM**: Sequelize para la gestión de modelos y datos.
-
----
-
-## 🏗️ | Arquitectura del Proyecto
+## 🏗️ | **Arquitectura del Proyecto**
 
 Para lograr una estructura modular, escalable y fácil de mantener, este backend está construido con una **arquitectura de tres capas**, organizando el código de manera clara y eficiente.
 
-* **Capa de Rutas (Routes):** Se encarga de manejar las solicitudes HTTP y dirige cada endpoint a su controlador correspondiente.
-* **Capa de Controladores (Controllers):** Procesa la lógica de negocio, realiza validaciones y gestiona la comunicación con la capa de servicios.
-* **Capa de Servicios (Services):** Interactúa directamente con la base de datos, asegurando que el acceso a datos sea flexible y escalable.
-
+* 🚦 | **Routes:**  Contiene archivos que definen los endpoints de la API y se encarga de manejar las solicitudes HTTP (GET, POST, PUT, DELETE), dirigiendo cada petición a su controlador correspondiente.
+* 🧠 | **Controllers:** Es el punto de entrada de cada solicitud. Su rol principal es manejar los parámetros de la petición, invocar las funciones de negocio de Services y responder al cliente con el código de estado HTTP adecuado (201 Created, 404 Not Found, etc.), incluyendo el manejo de errores.
+* 🛡️ | **Services:** Contiene la lógica de negocio principal. **Se alojan las funciones críticas de validación** que comprueban formato, rangos y unicidad de datos **antes** de cualquier interacción con la base de datos. Esta capa asegura que el acceso y manipulación de datos sea **flexible, seguro y escalable**.
+  
+➕ | **Estructura Adicional:**
+* **`models`:** Contiene la definición de esquemas de datos.
+* **`migrations`:** Administra los cambios en la estructura de la base de datos.
 ---
 
-## **Objetivo del proyecto**
-
-Brindar una herramienta eficiente, moderna y fácil de usar para profesionales médicos.
-
----
-
-## Instalación y Uso
+## ⚙️ | **Instalación y Uso**
 
 1.  **Clona este repositorio**.
     ```bash
-    git clone <URL_DEL_REPOSITORIO_BACKEND>
+    git clone [<URL_DEL_REPOSITORIO_BACKEND>](https://github.com/tedelcopp/MedApp-BackEnd---Project.git)
     ```
 
 2.  **Navega al directorio del proyecto**.
     ```bash
-    cd <directorio_del_proyecto>
+    cd MedApp-BackEnd---Project
     ```
 
 3.  **Instala las dependencias**.
@@ -66,20 +69,38 @@ Brindar una herramienta eficiente, moderna y fácil de usar para profesionales m
     ```bash
     npm start
     ```
+---
+## 🌐 | **API Pública**
+
+Podés acceder a traves de https://medapp-backend-project.onrender.com
+
+Si todo funciona bien, podras ver el mensaje de confirmación en pantalla:  
+
+  ```bash
+"MedApp Backend | Servidor en funcionamiento | Buenos Aires, Argentina."
+ ```
+---
+
+---
+## 🚀 | **Acceso**
+
+Podés ver la aplicación desplegada en: https://themedapp.vercel.app
 
 ---
 
-   ## **Accede**
-   
-⚡| Abre [MedApp](https://themedapp.vercel.app/) en tu navegador y empieza a disfrutarla ahora.
+## 🔑 | **Credencial de usuario maestro**
+  ```bash
+- MASTER_USER=medapp@gmail.com
+- MASTER_PASS=admin1234
+ ```
+---
+
+## 🤝 | **Contribuciones**
+
+Toda colaboración de mejora es bienvenida. Si tenes ideas para mejorar el código actual, no dudes en escribirme.
 
 ---
-## Contribuciones
 
-Toda colaboración de mejora es bienvenida! Si tenes ideas para mejorar el código existente, no dudes en escribirme.
+## 📬 | **Contacto**
 
----
-## Contacto
-
-Si tienes preguntas o deseas más información sobre el proyecto, podes contactarme a través de mi [LinkedIn](https://www.linkedin.com/in/edelcopp/).
-
+Podés contactarme a través de mi [LinkedIn](https://www.linkedin.com/in/edelcopp/) o por correo electrónico a [tomas.edelcopp@gmail.com](mailto:tomas.edelcopp@gmail.com).
