@@ -32,10 +32,9 @@ Para lograr una estructura modular, escalable y fácil de mantener, este backend
 * **Capa de Controladores (Controllers):** Procesa la lógica de negocio, realiza validaciones y gestiona la comunicación con la capa de servicios.
 * **Capa de Servicios (Services):** Interactúa directamente con la base de datos, asegurando que el acceso a datos sea flexible y escalable.
 * 
-**Estructura Adicional:**
+➕ | **Estructura Adicional:**
 * **`models`:** Contiene la definición de esquemas de datos.
 * **`migrations`:** Administra los cambios en la estructura de la base de datos.
-* 
 ---
 
 ## ⚙️ | **Instalación y Uso**
