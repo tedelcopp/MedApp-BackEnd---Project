@@ -16,11 +16,10 @@
 ---
 
 ## 🛠️ | **Tecnologías utilizadas**
-
-* **Backend**: Node.js, Express.js.
-* **Base de datos**: MySQL2.
-* **ORM**: Sequelize para la gestión de modelos y datos.
-
+* **Backend**: JavaScript ➤ Node.js.
+* **Framework**: Express.js.
+- **Base de datos:** [PostgreSQL](https://www.postgresql.org/) ➤ Hospedada en [Neon](https://neon.tech/).
+* **Alojamiento**: Render.
 ---
 
 ## 🏗️ | **Arquitectura del Proyecto**
