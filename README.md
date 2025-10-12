@@ -4,7 +4,7 @@
 
 ---
 
-## **✨ Características:**
+## **✨ | Características:**
 
 - **📋 Gestión de pacientes:** Crea, actualiza y elimina perfiles de pacientes de forma eficiente, manteniendo un registro médico organizado y accesible.
 - **📅 Organización de turnos médicos:** Programa, visualiza y gestiona todos los turnos médicos con facilidad.
@@ -15,7 +15,7 @@
   
 ---
 
-## 🛠️ **Tecnologías utilizadas**
+## 🛠️ | **Tecnologías utilizadas**
 
 * **Backend**: Node.js, Express.js.
 * **Base de datos**: MySQL2.
@@ -23,7 +23,7 @@
 
 ---
 
-## 🏗️ **Arquitectura del Proyecto**
+## 🏗️ | **Arquitectura del Proyecto**
 
 Para lograr una estructura modular, escalable y fácil de mantener, este backend está construido con una **arquitectura de tres capas**, organizando el código de manera clara y eficiente.
 
@@ -33,7 +33,7 @@ Para lograr una estructura modular, escalable y fácil de mantener, este backend
 
 ---
 
-## ⚙️ **Instalación y Uso**
+## ⚙️ | **Instalación y Uso**
 
 1.  **Clona este repositorio**.
     ```bash
@@ -65,18 +65,18 @@ Para lograr una estructura modular, escalable y fácil de mantener, este backend
     ```
 
 ---
-## 🚀 **Acceso**
+## 🚀 | **Acceso**
 
 Podés ver la aplicación desplegada en: https://themedapp.vercel.app
 
 ---
 
-## 🤝 **Contribuciones**
+## 🤝 | **Contribuciones**
 
 Toda colaboración de mejora es bienvenida. Si tenes ideas para mejorar el código actual, no dudes en escribirme.
 
 ---
 
-## 📬 **Contacto**
+## 📬 | **Contacto**
 
 Podés contactarme a través de mi [LinkedIn](https://www.linkedin.com/in/edelcopp/) o por correo electrónico a [tomas.edelcopp@gmail.com](mailto:tomas.edelcopp@gmail.com).
