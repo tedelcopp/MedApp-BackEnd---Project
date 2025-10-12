@@ -71,6 +71,13 @@ Podés ver la aplicación desplegada en: https://themedapp.vercel.app
 
 ---
 
+## 🔑 | **Credencial de acceso: usuario maestro**
+  ```bash
+-MASTER_USER=medapp@gmail.com
+-MASTER_PASS=admin1234
+ ```
+---
+
 ## 🤝 | **Contribuciones**
 
 Toda colaboración de mejora es bienvenida. Si tenes ideas para mejorar el código actual, no dudes en escribirme.
