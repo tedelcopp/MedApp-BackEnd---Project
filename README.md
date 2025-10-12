@@ -18,6 +18,8 @@
 ## 🛠️ | **Tecnologías utilizadas**
 * **Lenguaje**: JavaScript ➤ Node.js.
 * **Framework**: Express.js.
+* **ORM**: Sequelize.js.
+* **Dependencias**: Manejo de **CORS** y **dotenv**.
 * **Base de datos:** [PostgreSQL](https://www.postgresql.org/) ➤ Hospedada en [Neon](https://neon.tech/).
 * **Alojamiento**: Hospedado en [Render](https://render.com/).
 * **FrontEnd:** [tedelcopp/MedApp-FrontEnd---Project](https://github.com/tedelcopp/MedApp-FrontEnd---Project) ➤ Hospedado en [Vercel](https://vercel.com/).
