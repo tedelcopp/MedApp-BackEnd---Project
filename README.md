@@ -19,7 +19,9 @@
 * **Lenguaje**: JavaScript ➤ Node.js.
 * **Framework**: Express.js.
 * **Base de datos:** [PostgreSQL](https://www.postgresql.org/) ➤ Hospedada en [Neon](https://neon.tech/).
-* **Alojamiento**: Render.
+* **Alojamiento**: Hospedado en [Render](https://render.com/).
+* - **FrontEnd:** [tedelcopp/MedApp-FrontEnd---Project](https://github.com/tedelcopp/MedApp-FrontEnd---Project) ➤ Hospedado en [Vercel](https://vercel.com/).
+
 ---
 
 ## 🏗️ | **Arquitectura del Proyecto**
